@@ -65,6 +65,7 @@ class _CursosCadastroState extends State<CursosCadastro> {
         ],
         "porcentagem": 0.0,
       });
+      await App.salvar();
       MyToast.get('Curso salvo com sucesso!');
       Navigator.pop(context);
       App.pagina.value++;

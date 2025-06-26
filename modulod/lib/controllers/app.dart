@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class App {
   static ValueNotifier<int> pagina = ValueNotifier(0);
@@ -10,4 +13,9 @@ class App {
 
   static bool lista = true;
   static bool relatorio = false;
+
+  static salvar() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('cursos', jsonEncode(cursos));
+  }
 }

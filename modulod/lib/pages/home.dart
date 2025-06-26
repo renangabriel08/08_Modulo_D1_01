@@ -11,6 +11,7 @@ import 'package:modulod/pages/relatorios.dart';
 import 'package:modulod/styles/styles.dart';
 import 'package:modulod/widgets/toast.dart';
 import 'package:no_screenshot/no_screenshot.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -30,7 +31,15 @@ class _HomeState extends State<Home> {
     String data = await rootBundle.loadString('assets/dados.json');
     Map dados = jsonDecode(data);
 
-    App.cursos = dados['cursos'];
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? cursos = prefs.getString('cursos');
+
+    if (cursos == null) {
+      App.cursos = dados['cursos'];
+    } else {
+      App.cursos = jsonDecode(cursos);
+    }
+
     App.categorias = dados['categorias'];
     App.professores = dados['professores_id'];
 
