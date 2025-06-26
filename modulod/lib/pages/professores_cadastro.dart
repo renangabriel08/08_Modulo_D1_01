@@ -25,7 +25,7 @@ class _ProfessoresCadastroState extends State<ProfessoresCadastro> {
 
   salvar() async {
     if (nome.text.isEmpty) {
-      return 'Nome é obrigatório';
+      MyToast.get('Nome é obrigatório');
     } else {
       App.professores.add({
         "id": App.professores.last['id'] + 1,
